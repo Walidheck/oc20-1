@@ -1,20 +1,14 @@
-import pygame
-from pygame.locals import *
 
-SIZE = 500, 500
-RED = (255, 0, 0)
-GRAY = (150, 150, 150)
+from rect import *
 
-pygame.init()
-screen = pygame.display.set_mode(SIZE)
+def draw_point(text, pos):
+    img = font.render(text, True, BLACK)
+    pygame.draw.circle(screen, RED, pos, 3)
+    screen.blit(img, pos)
 
-rect = Rect(50, 160, 80, 80)
-rect2 = Rect(200, 200, 100, 100)
-print(rect)
-
-print(f'x={rect.x}, y={rect.y}, w={rect.w}, h={rect.h}')
-print(f'left={rect.left}, top={rect.top}, right={rect.right}, bottom={rect.bottom}')
-print(f'center={rect.center}')
+rect = Rect(50, 40, 250, 80)
+pts = ('topleft', 'topright', 'bottomleft', 'bottomright',
+        'midtop', 'midright', 'midbottom', 'midleft', 'center')
 
 running = True
 while running:
@@ -23,8 +17,11 @@ while running:
             running = False
 
     screen.fill(GRAY)
-    pygame.draw.rect(screen, RED, rect)
-    pygame.draw.rect(screen, RED, rect2)
+    pygame.draw.rect(screen, GREEN, rect, 4)
+
+    for pt in pts:
+        draw_point(pt, eval('rect.'+pt))
+
     pygame.display.flip()
 
 pygame.quit()
