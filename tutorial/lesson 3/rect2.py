@@ -1,4 +1,3 @@
-
 from rect import *
 
 def draw_point(text, pos):
